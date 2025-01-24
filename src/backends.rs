@@ -155,6 +155,9 @@ cfg_if! {
     } else if #[cfg(all(target_arch = "x86_64", target_env = "sgx"))] {
         mod rdrand;
         pub use rdrand::*;
+    } else if #[cfg(target_os = "zkvm")] {
+        mod zkvm;
+        pub use zkvm::*;
     } else if #[cfg(all(target_arch = "wasm32", any(target_os = "unknown", target_os = "none")))] {
         compile_error!(
             "The wasm32-unknown-unknown targets are not supported by default; \
